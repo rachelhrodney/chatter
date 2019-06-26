@@ -1,0 +1,56 @@
+*{
+  box-sizing: border-box;
+}
+
+.App {
+  background: #200122;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6f0000, #200122);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6f0000, #200122); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ;
+  height:100vh;
+  text-align: center;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-size:40px;
+  font-family: 'Impact';
+  background:rgba(255,255,255,0.2);
+  color: white;
+  padding: 50px 20px;
+  text-align: left;
+  /*border-bottom: 2px solid white;*/
+}
+
+.logo{
+  height: 80px;
+  margin-right: 100px;
+}
+
+.text-input{
+  position:absolute;
+  bottom:0;
+  height:40px;
+  width:100%;
+  border-top:2px solid white;
+}
+
+.text-input button {
+  width: 40px;
+  height:100%;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.text-input input{
+  width:calc(100% - 50px);
+  height:90%;
+  font-size:24px;
+}
+
+.text-input button:hover {
+  background:teal;
+  color:white;
+}
