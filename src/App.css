@@ -51,7 +51,7 @@
   color: white;
 }
 
-.text-input button {
+.text-input > button {
   position: absolute;
   color: orange;
   width: 40px;
@@ -62,7 +62,7 @@
   border: 1px solid white;
 }
 
-.text-input input{
+.text-input > input{
   width:calc(100% - 50px);
   height:90%;
   font-size:24px;
@@ -72,12 +72,18 @@
   border: 1px solid purple
 }
 
-.text-input div{
+.text-input > div{
   position:absolute;
   bottom:0;
 }
 
-.text-input button:hover {
+.text-input > button:hover {
   background:purple;
   color:white;
+}
+
+.text-input > button[disabled] {
+  color:white;
+  background:grey;
+  cursor:default;
 }
