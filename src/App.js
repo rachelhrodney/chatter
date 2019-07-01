@@ -11,6 +11,7 @@ function App() {
         Chatter
         </header>
         <TextInput />
+        
     </div>
   );
 }

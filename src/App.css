@@ -16,17 +16,29 @@
   align-items: center;
   flex-direction: row;
   font-size:40px;
-  font-family: 'Impact';
+  font-family: 'Trebuchet MS';
   background:rgba(255,255,255,0.2);
   color: white;
-  padding: 50px 20px;
+  padding: 10px 20px;
   text-align: left;
   /*border-bottom: 2px solid white;*/
 }
 
 .logo{
   height: 80px;
-  margin-right: 100px;
+  margin-right: 20px;
+}
+
+.bubble{
+  position: left;
+  background-color: orange;
+  left: 25px;
+  top: -60px;
+  width: 150px;
+  height:30px;
+  border-radius:15px;
+  padding: 10px 20px;
+  border: 1px solid white;
 }
 
 .text-input{
@@ -35,22 +47,37 @@
   height:40px;
   width:100%;
   border-top:2px solid white;
+  background:rgba(255,255,255,0.2);
+  color: white;
 }
 
 .text-input button {
+  position: absolute;
+  color: orange;
   width: 40px;
+  right: 15px;
   height:100%;
-  border-radius:10px;
+  border-radius:15px;
   cursor:pointer;
+  border: 1px solid white;
 }
 
 .text-input input{
   width:calc(100% - 50px);
   height:90%;
   font-size:24px;
+  position:absolute;
+  left: 25px;
+  border-radius:15px;
+  border: 1px solid purple
+}
+
+.text-input div{
+  position:absolute;
+  bottom:0;
 }
 
 .text-input button:hover {
-  background:teal;
+  background:purple;
   color:white;
 }
