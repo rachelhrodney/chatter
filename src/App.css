@@ -21,6 +21,7 @@
   color: white;
   padding: 10px 20px;
   text-align: left;
+  justify-content:space-between;
   /*border-bottom: 2px solid white;*/
 }
 
@@ -39,6 +40,47 @@
   border-radius:15px;
   padding: 10px 20px;
   border: 1px solid white;
+  line-height: 8px;
+}
+
+.messages{
+  overflow:auto;
+  height:calc(100% - 128px);
+  padding-top:10px;
+}
+
+.bubble-wrap{
+  width:100%;
+  padding:8px 20px;
+  display:flex;
+  position: relative;
+}
+
+.bubble-wrap[from="me"] {
+  flex-direction:row-reverse;
+}
+
+.bubble-wrap[from="me"] .bubble:before{
+  left:auto;
+  right:-6px;
+}
+.bubble:after{
+  content:"";
+  background:orange;
+  position:absolute;
+  border-radius:20px;
+}
+.bubble > span {
+  color:white;
+  position:relative;
+  z-index:101;
+}
+.bubble-name{
+  position: absolute;
+  color: white;
+  top: -5px;
+  font-size:10px;
+  left: 30px;
 }
 
 .text-input{
@@ -54,9 +96,10 @@
 .text-input > button {
   position: absolute;
   color: orange;
-  width: 40px;
-  right: 15px;
-  height:100%;
+  width: 30px;
+  height:30px;
+  right: 27px;
+  bottom: 6px;
   border-radius:15px;
   cursor:pointer;
   border: 1px solid white;
@@ -87,3 +130,37 @@
   background:grey;
   cursor:default;
 }
+
+.edit-username{
+  display: flex;
+  align-items: center;
+}
+
+.name-button{
+  height:29px;
+  margin:0 6px;
+  background:transparent;
+  border:1px solid white;
+  color:white;
+  font-size:10px;
+  padding:7px;
+  cursor: pointer;
+}
+
+.name-input{
+  color:black;
+  height:31px;
+  border:1px solid white;
+  border-radius:14px;
+  padding-left:12px;
+  background:orange;
+  padding-bottom:2px;
+  font-size:12px;
+}
+.username{
+  display: flex;
+  align-items: center;
+  margin-right:12px;
+  font-size:16px;
+}
+
