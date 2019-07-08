@@ -30,23 +30,12 @@
   margin-right: 20px;
 }
 
-.bubble{
-  position: left;
-  background-color: orange;
-  left: 25px;
-  top: -60px;
-  width: 150px;
-  height:30px;
-  border-radius:15px;
-  padding: 10px 20px;
-  border: 1px solid white;
-  line-height: 8px;
-}
-
 .messages{
+  display: flex;
   overflow:auto;
-  height:calc(100% - 128px);
+  height:calc(100% - 132px);
   padding-top:10px;
+  flex-direction: column-reverse;
 }
 
 .bubble-wrap{
@@ -60,14 +49,39 @@
   flex-direction:row-reverse;
 }
 
+.bubble{
+  position: left;
+  background-color: orange;
+  top: -30px;
+  border-radius:15px;
+  padding: 10px 20px;
+  border: 1px solid white;
+  line-height: 8px;
+  position: relative;
+}
+
+.bubble:before{
+  content:"";
+  width:9px;
+  height:9px;
+  transform:rotate(45deg);
+  background:orange;
+  border: 1px solid white;
+  position:absolute;
+  left:-2px;
+  top:9px
+}
+
 .bubble-wrap[from="me"] .bubble:before{
   left:auto;
-  right:-6px;
+  right:-2px;
 }
+
 .bubble:after{
   content:"";
   background:orange;
   position:absolute;
+  top:0;left:0;right:0;bottom:0;
   border-radius:20px;
 }
 .bubble > span {
@@ -78,14 +92,14 @@
 .bubble-name{
   position: absolute;
   color: white;
-  top: -5px;
+  top: -35px;
   font-size:10px;
   left: 30px;
 }
 
 .text-input{
   position:absolute;
-  bottom:0;
+  bottom:0px;
   height:40px;
   width:100%;
   border-top:2px solid white;
@@ -162,5 +176,12 @@
   align-items: center;
   margin-right:12px;
   font-size:16px;
+}
+
+.messages{
+  overflow:auto;
+  height:calc(100% - 132px);
+  padding-top:10px;
+  flex-direction: column-reverse;
 }
 

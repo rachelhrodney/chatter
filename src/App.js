@@ -3,6 +3,9 @@ import './App.css';
 import logo from './kittyLogo.png';
 import TextInput from './TextInput'
 import NamePicker from './namePicker.js'
+import * as firebase from "firebase/app";
+import "firebase/firestore"
+import "firebase/storage"
 
 class App extends React.Component {
   state = {
@@ -11,22 +14,54 @@ class App extends React.Component {
     editName:false,
   }
 
-  sendMessage = (m) => {
-    var messages = [...this.state.messages, m]
-    this.setState({ messages })
+  componentWillMount(){
+    var name = localStorage.getItem('name')
+    if(name){
+      this.setState({name})
+    }
+
+    firebase.initializeApp({
+      apiKey: "AIzaSyBAJVwrP5J4AhVKd5ijYtcTF9XMV6tIcY4",
+      authDomain: "msgr-2.firebaseapp.com",
+      projectId: "msgr-2",
+      storageBucket: "msgr-2.appspot.com",
+    });
+    
+    this.db = firebase.firestore();
+
+    this.db.collection("messages").onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          //console.log(change.doc.data())
+          this.receive(change.doc.data())
+        }
+      })
+    })
   }
 
-  gotMessage = (text) => {
-    /*const message = {
-      text: m,
-      from: this.state.name
-    }*/
-    var newMessagesArray = [...this.state.messages, text]
-    this.setState({messages: newMessagesArray})
+  receive = (m) => {
+    const messages = [m, ...this.state.messages]
+    messages.sort((a,b)=>b.ts-a.ts)
+    this.setState({messages})
+  }
+
+  send = (m) => {
+    this.db.collection("messages").add({
+      ...m,
+      from: this.state.name || 'No name',
+      ts: Date.now()
+    })
+  }
+
+  setEditName = (editName) => {
+    if(!editName){
+      localStorage.setItem('name', this.state.name)
+    }
+    this.setState({editName})
   }
 
   render() {
-    var {messages} = this.state
+    var {editName, messages, name} = this.state
     return (
       <div className="App">
         <header className="header">
@@ -35,22 +70,25 @@ class App extends React.Component {
             Chatter
           </div>
           <NamePicker 
-          name={this.state.name}
-          editName={this.state.editName}
-          changeName={name=> this.setState({name})}
-          setEditName={editName=> this.setState({editName})}
+            name={this.state.name}
+            editName={this.state.editName}
+            changeName={name=> this.setState({name})}
+            setEditName={this.setEditName}
           /> 
         </header>
         <main className="messages">
           {messages.map((m,i)=>{
-            return (<div key={i} className="bubble-wrap">
+            return (<div key={i} className="bubble-wrap" 
+              from={m.from===name ? "me" : "you"}
+            >
+              {m.from!==name && <div className="bubble-name">{m.from}</div>}
               <div className="bubble">
-                <span>{m}</span>
+                <span>{m.text}</span>
               </div>
             </div>)
           })}
         </main>
-        <TextInput sendMessage={this.sendMessage} />
+        <TextInput sendMessage={text=> this.send({text})} />
       </div>
     )
   }
