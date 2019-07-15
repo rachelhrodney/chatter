@@ -7,6 +7,7 @@ import Camera from 'react-snap-pic'
 import * as firebase from "firebase/app";
 import "firebase/firestore"
 import "firebase/storage"
+import Div100vh from 'react-div-100vh'
 
 class App extends React.Component {
   state = {
@@ -16,9 +17,13 @@ class App extends React.Component {
     showCamera:false,
   }
   
-  takePicture = (img) => {
-    console.log(img)
+  takePicture = async (img) => {
     this.setState({showCamera:false})
+    const imgID = Math.random().toString(36).substring(7);
+    var storageRef = firebase.storage().ref();
+    var ref = storageRef.child(imgID+'.jpg');
+    await ref.putString(img, 'data_url')
+    this.send({img: imgID})
   }
 
   componentWillMount(){
@@ -69,14 +74,13 @@ class App extends React.Component {
 
   render() {
     var {editName, messages, name} = this.state
-
     return (
-      <div className="App">
+      <Div100vh className="App">
       {this.state.showCamera && <Camera takePicture={this.takePicture} />}
         <header className="header">
-          <div>
+          <div style={{display:'flex',alignItems:'center'}}>
             <img src={logo} className="logo" alt="logo" />
-            Chatter
+            {editName?'':'Chatter'}
           </div>
           <NamePicker 
             name={this.state.name}
@@ -93,12 +97,15 @@ class App extends React.Component {
         <TextInput sendMessage={text=> this.send({text})} 
           showCamera={()=>this.setState({showCamera:true})}
         />
-      </div>
+      </Div100vh>
     )
-  }
-}
+  } // end render
+}// end app component
 
 export default App;
+
+const bucket = 'https://firebasestorage.googleapis.com/v0/b/myawesomestproject.appspot.com/o/'
+const suffix = '.jpg?alt=media'
 
 function Message(props) {
   var {m, name} = props
@@ -108,6 +115,7 @@ function Message(props) {
     {m.from!==name && <div className="bubble-name">{m.from}</div>}
     <div className="bubble">
       <span>{m.text}</span>
+      {m.img && <img alt="pic" src={bucket+m.img+suffix} />}
     </div>
 </div>)
 }

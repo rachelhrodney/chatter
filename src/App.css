@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  font-size:40px;
+  font-size:3rem;
   font-family: 'Trebuchet MS';
   background:rgba(255,255,255,0.2);
   color: white;
@@ -27,7 +27,7 @@
 
 .logo{
   height: 80px;
-  margin-right: 20px;
+  margin-right: 1.5rem;
 }
 
 .messages{
@@ -47,6 +47,7 @@
 
 .bubble-wrap[from="me"] {
   flex-direction:row-reverse;
+  flex-shrink:0;
 }
 
 .bubble{
@@ -89,6 +90,11 @@
   position:relative;
   z-index:101;
 }
+
+.bubble img {
+  position: relative;
+  z-index: 101;
+}
 .bubble-name{
   position: absolute;
   color: white;
@@ -98,7 +104,7 @@
 }
 
 .text-input{
-  position:absolute;
+  position:fixed;
   bottom:0px;
   height:40px;
   width:100%;
@@ -169,13 +175,13 @@
   padding-left:12px;
   background:orange;
   padding-bottom:2px;
-  font-size:12px;
+  font-size:1rem;
 }
 .username{
   display: flex;
   align-items: center;
   margin-right:12px;
-  font-size:16px;
+  font-size:1rem;
 }
 
 .messages{
